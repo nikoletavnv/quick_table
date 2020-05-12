@@ -1,0 +1,255 @@
+$zIndex-tooltip: 1;
+$zIndex-important: 2;
+
+$space-normal: 10px;
+$space-small: 5px;
+
+$actionsHeight: 50px;
+$titleHeight: 30px;
+$tableSpacing: 1px;
+
+.TableWrapper {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+}
+
+.Caption {
+    position: sticky;
+    top: 0;
+    z-index: $zIndex-tooltip;
+    padding: 0 $space-normal;
+    background-color: #DDD;
+    text-align: left;
+
+    .Title {
+        height: $titleHeight;
+        line-height: $titleHeight;
+        font-weight: bold;
+    }
+
+    .Actions {
+        height: $actionsHeight;
+        display: flex;
+        align-items: center;
+        font-size: 0.9em;
+
+        & > :first-child {
+            margin-right: $space-normal;
+        }
+
+        .ActionItem {
+            padding: $space-small;
+            margin: 0 $space-small;
+            border: solid 1px #333;
+            border-radius: 3px;
+
+            & > :first-child {
+                margin-right: $space-small;
+            }
+        }
+
+        .Active {
+            background-color: lighten(green, 15%);
+            cursor: pointer;
+
+            & > :first-child {
+                font-weight: bold;
+            }
+
+            &:hover {
+                background-color: lighten(green, 30%);
+            }
+        }
+
+        .Disabled {
+            background-color: #DDD;
+            color: #FFF;
+            pointer-events: unset;
+            cursor: not-allowed;
+        }
+    }
+}
+
+.Table {
+    width: 100%;
+    border-spacing: 0 $tableSpacing;
+    position: relative;
+
+    th {
+        position: sticky;
+        top: 0;
+        background-color: #DDD;
+        z-index: $zIndex-tooltip;
+    }
+
+    .LargeTopPosition th {
+        top: calc(#{$actionsHeight} + #{$titleHeight}) !important;
+    }
+
+    .MediumTopPosition th {
+        top: $actionsHeight !important;
+    }
+
+    .SmallTopPosition th {
+        top: $titleHeight !important;
+    }
+
+    .Header {
+        height: $titleHeight;
+        font-size: 0.9em;
+        text-align: left;
+
+        .Checkbox {
+            padding-left: $space-small;
+            width: 40px;
+        }
+
+        .Column {
+            position: relative;
+            display: flex;
+            align-items: center;
+            min-width: 100px;
+            padding: 0 $space-small;
+            white-space: nowrap;
+            font-weight: bold;
+        }
+
+        .Action {
+            cursor: pointer;
+        }
+    }
+
+    .Data {
+        .Row {
+            display: table-row !important;
+            background-color: #FFF;
+            text-align: left;
+            box-shadow: 0 1px 2px #DDD;
+
+            & > td {
+                padding-left: $space-small;
+                word-break: break-all;
+                max-width: 1px;
+            }
+
+            .Expanded,
+            .Collapsed {
+                vertical-align: middle;
+                color: blue;
+                margin-left: 0;
+                margin-right: $space-small;
+            }
+
+            .Collapsed {
+                transform: rotate(-90deg);
+            }
+
+            &:hover {
+                cursor: pointer;
+                background-color: #DDD;
+                color: #FFF;
+
+                .Expanded,
+                .Collapsed {
+                    color: #FFF;
+                }
+            }
+        }
+
+        .RowExtra {
+            background-color: #DDD;
+            text-align: center;
+
+            .ExtraInfo {
+                flex: 1;
+                text-align: left;
+            }
+        }
+    }
+
+    .Empty {
+        text-align: center;
+    }
+
+    .Footer {
+        padding: $space-small;
+        border: solid 1px #DDD;
+        background-color: #DDD;
+    }
+}
+
+.Icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: $space-small;
+    vertical-align: middle;
+}
+
+.IconSmall {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    margin-left: $space-small;
+}
+
+.IconBig {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    flex-basis: 24px;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.Ascending {
+    transform: rotate(180deg);
+}
+
+.FilterContainer {
+    .Filter {
+        position: absolute;
+        left: 0;
+        margin-top: $space-small;
+        padding: $space-small;
+        display: flex;
+        flex: 1;
+        z-index: $zIndex-important;
+        background-color: #FFF;
+        border: solid 1px #DDD;
+        min-width: 200px;
+        cursor: default;
+
+        input[type='search'] {
+            -webkit-appearance: searchfield;
+            outline: none;
+            flex: 1;
+            height: 24px;
+            box-sizing: border-box;
+            min-width: 100px;
+        }
+
+        input[type='search']::-webkit-search-cancel-button {
+            -webkit-appearance: searchfield-cancel-button;
+        }
+    }
+}
+
+.ConfirmSection {
+    padding: $space-normal;
+
+    & > * {
+        display: inline;
+    }
+
+    button:nth-child(n) {
+        margin-left: $space-normal;
+    }
+}
+
+.FullFilter {
+    color: blue;
+}

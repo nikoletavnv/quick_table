@@ -1,0 +1,69 @@
+$checkboxSize: 24px;
+$tickPositionTop: 1px;
+$tickPositionLeft: 6px;
+
+.CheckboxContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.Checkbox {
+    position: relative;
+    display: block;
+    width: $checkboxSize;
+    height: $checkboxSize;
+    flex: $checkboxSize 0 0;
+    user-select: none;
+}
+
+.CheckboxInput {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: $checkboxSize;
+    height: $checkboxSize;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.CheckboxMark {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    height: $checkboxSize;
+    width: $checkboxSize;
+    background-color: #FFF;
+    border: solid 1px #DDD;
+    cursor: pointer;
+
+    &::after {
+        content: '';
+        position: absolute;
+        display: none;
+        left: $tickPositionLeft;
+        top: $tickPositionTop;
+        width: $checkboxSize/4;
+        height: $checkboxSize/2;
+        border: solid 1px #DDD;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+}
+
+.CheckboxInput:disabled ~ .CheckboxMark {
+    background-color: #DDD;
+}
+
+.CheckboxInput:checked ~ .CheckboxMark::after {
+    display: block;
+}
+
+.CheckboxContent {
+    flex: 1 auto;
+}
